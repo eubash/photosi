@@ -23,8 +23,10 @@ $ node server
 Project is available on http://localhost:8080
 
 ###Additional information
-Node v 6.3.1
+Node 6.3.1
+
 Npm 3.10.7
+
 Bower 1.7.9
 
 
