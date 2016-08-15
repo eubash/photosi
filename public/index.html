@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="testApp">
+<head>
+
+	<title>Angular App Test</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="description" content="">
+  	<meta name="author" content="Eubash">
+
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+
+	<!-- Styles -->
+	<link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/app.css" rel='stylesheet' type='text/css'>
+
+	<base href="/">
+</head>
+<body ng-cloak="">
+	<div class="blog-masthead">
+		<div class="container">
+			<nav class="blog-nav">
+				<a class="blog-nav-item active" href="#">Test App - Lista dei prodotti</a>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="page-content">
+			<div ng-view="" id="ng-view"></div>
+		</div>
+	</div>
+
+
+	<!--Foreign Scripts-->
+	<script src="components/angular/angular.min.js"></script>
+	<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="components/angular-route/angular-route.min.js"></script>
+	<script src="components/angular-animate/angular-animate.min.js"></script>
+
+	<!-- AngularJS custom codes -->
+	<script src="js/app.js"></script>
+	<script src="js/data.js"></script>
+	<script src="js/controllers/productsCtrl.js"></script>
+	<script src="js/directives.js"></script>
+
+	<!-- Some Bootstrap Helper Libraries -->
+	<script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="components/underscore/underscore-min.js"></script>
+
+</body>
+</html>

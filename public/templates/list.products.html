@@ -1,0 +1,36 @@
+<h2>Products</h2>
+<hr/>
+<button type="button" class="btn btn-danger" ng-click="open(product);">&nbsp;Add New Product</button>
+
+<div class="table-responsive">
+    <div class="panel panel-primary">
+        <div class="panel-heading">List of products
+            <div class="sw-search" >
+                <div class="nav-search" id="nav-search">
+                    Cerca: <span class="input-icon">
+                        <input placeholder="Cerca prodotti..." class="nav-search-input" ng-model="filterProduct" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <span class="search-icon glyphicon glyphicon-search"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr ng-show="products.length==0"><td style="vertical-align:middle;"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;No data found</td></tr>
+                <tr ng-hide="products.length>-1"><td style="vertical-align:middle;"><span class="glyphicon glyphicon-repeat"></span>&nbsp;Loading</td></tr>
+
+                <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
+
+                <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" animate-on-change='c.price + c.description' ng-animate=" 'animate'">
+                    <td>{{c.id}}</td><td><a ng-href="{{url}}:{{port}}/{{c.id}}">{{c.name}}</a></td><td>{{c.price}}</td><td>{{c.description}}</td>
+                    <td style="width:100px">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default glyphicon glyphicon-pencil" ng-click="open(c);"></button>
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash" ng-click="deleteProduct(c);"></button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<button type="button" class="close" ng-click="cancel();">
+    <span class="glyphicon glyphicon-time" style="margin:10px;color:blue;"></span>
+</button>
+<div class="modal-header">
+    <h3 class="modal-title">{{title}} [ID: {{product.id}}]</h3>
+</div>
+<div class="modal-body">
+    <form name="product_form" class="form-horizontal" role="form" novalidate>
+        <form-element label="NOME" mod="product">
+            <input type="text" class="form-control" name="name" placeholder="NOME" ng-model="product.name" ng-disabled="product.id" focus/>
+        </form-element>
+        <form-element label="DESCRIZIONE" mod="product">
+            <textarea class="form-control" name="description" placeholder="DESCRIZIONE" ng-model="product.description">{{product.description}}</textarea>
+        </form-element>
+        <form-element label="PREZZO" mod="product">
+            <input type="text" name="price" class="form-control" placeholder="PREZZO" ng-model="product.price"  only-numbers/>
+            <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Inserire il prezzo.</small>
+        </form-element>
+
+        <div class="space"></div>
+        <div class="space-4"></div>
+        <div class="modal-footer">
+            <form-element label="">
+                <div class="text-right">
+                    <a class="btn btn-sm" ng-click="cancel()"><span class="ace-icon glyphicon glyphicon-remove"></span>Cancel</a>
+                    <button ng-click="saveProduct(product);"
+                            ng-disabled="product_form.$invalid || enableUpdate"
+                            class="btn btn-sm btn-primary"
+                            type="submit">
+                        <span class="ace-icon glyphicon glyphicon-check"></span>{{buttonText}}
+                    </button>
+                </div>
+            </form-element>
+        </div>
+    </form>
+</div>
