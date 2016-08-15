@@ -20,3 +20,5 @@ After installing in project directory
 $ node server
 ```
 
+Project is available on http://localhost:8080
+
