@@ -4,7 +4,7 @@ This repo is for test exercise.
 ##Install
 First of all clone this repo
 ```sh
-git clone https://github.com/eubash/photosi.git
+$ git clone https://github.com/eubash/photosi.git
 ```
 
 You should install this package with npm and with bower. 
