@@ -22,7 +22,7 @@
                 <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
 
                 <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" animate-on-change='c.price + c.description' ng-animate=" 'animate'">
-                    <td>{{c.id}}</td><td><a ng-href="{{url}}:{{port}}/{{c.id}}">{{c.name}}</a></td><td>{{c.price}}</td><td>{{c.description}}</td>
+                    <td>{{c.id}}</td><td><a ng-href="/{{c.id}}">{{c.name}}</a></td><td>{{c.price}}</td><td>{{c.description}}</td>
                     <td style="width:100px">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default glyphicon glyphicon-pencil" ng-click="open(c);"></button>
