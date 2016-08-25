@@ -1,0 +1,17 @@
+[
+  {
+    "name":"First product",
+    "price":50,"description":"Ottimo prodotto",
+    "id":"01a"
+  },
+  {"name":"Terzo prodotto",
+    "price":30.5,
+    "description":"Super prodotto",
+    "id":"03a"
+  },
+  {"name":"Secondo prodotto",
+    "description":"Ottimo rapporto qualità  prezzo",
+    "price":40,
+    "id":"02a"
+  }
+]

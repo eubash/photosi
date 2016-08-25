@@ -5,6 +5,10 @@ app.controller('productsCtrl', function (myConfig, $scope, $uibModal, $filter, D
     $scope.port = myConfig.port;
     Data.get('products').then(function(data){
         $scope.products = data;
+
+        $scope.products.forEach(function (item) {
+            item.id = parseInt(item.id);
+        });
     });
 
     $scope.deleteProduct = function(product){
@@ -32,6 +36,7 @@ app.controller('productsCtrl', function (myConfig, $scope, $uibModal, $filter, D
             }else if(selectedObject.save == "update"){
                 p.description = selectedObject.description;
                 p.price = selectedObject.price;
+                p.name = selectedObject.name;
             }
         });
     };
@@ -61,11 +66,47 @@ app.controller('editProductCtrl', function ($scope, $uibModalInstance, item, Dat
     $scope.isClean = function() {
         return angular.equals(original, $scope.product);
     }
+
     $scope.saveProduct = function (product) {
 
-        // Some awesome code for saving product
+        Data.get('products').then(function(data){
+            $scope.products = data;
+            $scope.products.forEach(function (item) {
+                item.id = parseInt(item.id);
+            });
 
+            var flag = false;
+
+            $scope.products.forEach( function( item ) {
+
+                    if(item.id == product.id) {
+                        flag = true;
+                    }
+
+            });
+
+            if(flag) {
+
+                Data.put('products/'+product.id, product).then(function (result) {
+
+                    var x = angular.copy(product);
+                    x.save = 'update';
+                    $uibModalInstance.close(x);
+                });
+            }else {
+
+                Data.post('products', product).then(function (result) {
+
+                    var x = angular.copy(product);
+                    x.save = 'insert';
+                    x.id = result.id;
+                    $uibModalInstance.close(x);
+
+                });
+            }
+        });
     };
+
 });
 
     app.controller('productCtrl', function (myConfig, $scope, $filter, $routeParams, Data) {

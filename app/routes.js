@@ -1,21 +1,47 @@
 var Products = require('./models/products');  //mongoose model for DB
 
-var totalProducts = [{"name":"First product","price":50,"description":"Ottimo prodotto","id":"01a"},{"name":"Terzo prodotto","price":30.5,"description":"Super prodotto","id":"03a"},{"name":"Secondo prodotto","description":"Ottimo rapporto qualità  prezzo","price":40,"id":"02a"}];
+// JSON DataBase
 
-function getProducts(res) {
+var JsonDB = require('node-json-db');   //Json Data storage
 
-    (function(err, products) {
+var db = new JsonDB("productsDataBase", true, false);
 
-        products = totalProducts;
+    var tmpData = db.getData("/");
+    var globalId = 0;
 
-        if (err) {
-           res.send(err);
-        }
+    for(var key in tmpData ) {
+        globalId = key;
+    }
+    globalId++;
 
-        res.json(products);
-    })();
 
-};
+
+        function getProducts(res) {
+
+            var allData = db.getData("/");
+            var totalData = [];
+            for(var key in allData )
+            {
+                totalData.push({
+                    id: key,
+                    name: allData[key].name,
+                    price: allData[key].price/100,
+                    description: allData[key].description
+                });
+
+            }
+
+            (function(err, products) {
+
+              products = totalData;
+
+                if (err) {
+                   res.send(err);
+                }
+
+                res.json(products);
+            })();
+}
 
 module.exports = function(app) {
 
@@ -47,7 +73,7 @@ module.exports = function(app) {
     //});
 
 
-    //In our case without database ==================================
+    //Our case with JSON database ==================================
 
     // get all products
     app.get('/api/products', function(req, res) {
@@ -61,15 +87,54 @@ module.exports = function(app) {
 
         var id = req.params.product_id;
 
+        var getData = db.getData("/"+ id);
+        var totalData = {
+            id: id,
+            name: getData.name,
+            price: getData.price/100,
+            description: getData.description
+        };
+
         (function(err, product) {
+            product = totalData;
             if (err)
                 return res.send(err);
 
-            totalProducts.forEach( function( item ) {
-                if(item.id == id)
-                    res.json(item);
-            });
+            res.json(product);
         })();
+
+    });
+
+    //create a new product
+    app.post('/api/products', function (req, res) {
+
+        var newProduct = req.body;
+
+            db.push("/"+ globalId, {
+                    name: newProduct.name,
+                    price: parseInt(parseFloat(newProduct.price)*100),
+                    description: newProduct.description
+                }, false);
+            var id = globalId;
+            globalId++;
+
+            res.json({id: id});
+
+
+    });
+
+    //update an exist product
+    app.put('/api/products/:product_id', function (req, res) {
+
+        var uId = req.body;
+        db.delete("/"+ uId.id);
+        db.push("/"+ uId.id, {
+            name: uId.name,
+            price: parseInt(parseFloat(uId.price)*100),
+            description: uId.description
+        }, false);
+
+        res.send();
 
     });
 
@@ -77,7 +142,9 @@ module.exports = function(app) {
     // delete a product
     app.delete('/api/products/:product_id', function (req, res) {
 
-        getProducts(res);
+        db.delete("/"+ req.params.product_id);
+
+        res.send();
 
     });
 

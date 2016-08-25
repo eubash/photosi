@@ -26,8 +26,8 @@ html, body{
 }
 
 .table-striped>tbody>tr.change-up>td {
-    color: white;
-    background-color: green;
+    /*color: white;*/
+    /*background-color: green;*/
     transition: all 1s;
     -webkit-transition: all 1s ease-in-out;
 }
@@ -37,15 +37,15 @@ html, body{
 }
 .table-striped>tbody>tr.change-up-add,.table-striped>tbody>tr.change-up-remove  {
     background-color: white;
-    background-color: green;
+    background-color: #d5d5d5;
     transition: all 1s;
     -webkit-transition: all 1s ease-in-out;
 }
 .table-striped>tbody>tr.change-up-add-active>td {
-    background-color: green;
+    background-color: #d5d5d5;
 }
 .table-striped>tbody>tr.change-up-remove {
-    background-color: green;
+    background-color: #d5d5d5;
 }
 .table-striped>tbody>tr.change-up-remove-active {
     background-color: white;
